@@ -19,9 +19,8 @@ export default function Home() {
       <FadeInOnScroll>
         <TokenizationSection />
       </FadeInOnScroll>
-      <FadeInOnScroll>
-        <TokenizationStep />
-      </FadeInOnScroll>
+      <TokenizationStep />
+      
 
       <FloatingSection />
 
