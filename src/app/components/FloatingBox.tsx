@@ -20,23 +20,14 @@ const FloatingBox: FC<FloatingBoxProps> = ({
   className = "",
   axis = "y"
 }) => {
-  const floatingVariants = {
-    animate: {
-      [axis]: [0, -amplitude, 0],
-      transition: {
-        duration,
-        repeat: Infinity,
-        ease: "easeInOut",
-        delay,
-      }
-    }
+  // Animate only the axis, keep transition separate
+  const animateAxis: Record<string, number[]> = {
+    [axis]: [0, -amplitude, 0],
   };
 
   return (
     <motion.div
-      animate={{
-        [axis]: [0, -amplitude, 0],
-      } as any}
+      animate={animateAxis}
       transition={{
         duration,
         repeat: Infinity,
