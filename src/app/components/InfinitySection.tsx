@@ -67,7 +67,9 @@ const InfinitySection: FC = () => {
               />
             </>
           )}
-          <InfinityCanvas />
+          <div className="relative w-full h-full">
+            <InfinityCanvas />
+          </div>
           <Image
             src="/phone-mockup.png"
             alt="App Preview"
