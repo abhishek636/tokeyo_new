@@ -2,8 +2,8 @@
 
 import dynamic from "next/dynamic";
 
-const InfinitySection = dynamic(() => import("@/app/components/InfinitySection"), { ssr: false });
-const PartnersMarquee = dynamic(() => import("@/app/components/PartnersMarquee"), { ssr: false });
+const InfinitySection = dynamic(() => import("@/app/components/InfinitySection"), { ssr: true });
+const PartnersMarquee = dynamic(() => import("@/app/components/PartnersMarquee"), { ssr: true });
 const TokenizationSection = dynamic(() => import("@/app/components/TokenizationSection"));
 const TokenizationStep = dynamic(() => import("@/app/components/TokenizationStep"), { ssr: false });
 const FloatingSection = dynamic(() => import("@/app/components/FloatingSection"), { ssr: false });
