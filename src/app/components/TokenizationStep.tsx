@@ -55,7 +55,7 @@ const TokenizationStep: FC = () => {
                             </div>
                             <div className="w-full md:w-1/2 flex flex-col items-center text-center max-w-[463px]">
                                 <Image
-                                    src="/check.svg"
+                                    src="/Check.svg"
                                     alt="Check"
                                     width={91}
                                     height={91}
