@@ -41,8 +41,9 @@ const TokenizationStep: FC = () => {
                             <br className="hidden lg:block" /> Capital Markets.
                         </h2>
                     </FadeInOnScroll>
-                    <FadeInOnScroll>
-                        <div className="mx-auto flex flex-col md:flex-row items-center justify-between">
+
+                    <div className="mx-auto flex flex-col md:flex-row items-center justify-between">
+                        <FadeInOnScroll>
                             <div className="relative md:h-[700px] h-[400px] w-full">
                                 <InfinityCanvas />
                                 <Image
@@ -53,6 +54,8 @@ const TokenizationStep: FC = () => {
                                     className="drop-shadow-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
                                 />
                             </div>
+                        </FadeInOnScroll>
+                        <FadeInOnScroll>
                             <div className="w-full md:w-1/2 flex flex-col items-center text-center max-w-[463px]">
                                 <Image
                                     src="/Check.svg"
@@ -68,10 +71,12 @@ const TokenizationStep: FC = () => {
                                     performs quick KYC/AML checks.
                                 </p>
                             </div>
-                        </div>
-                    </FadeInOnScroll>
-                    <FadeInOnScroll>
-                        <div className="mx-auto flex flex-col md:flex-row items-center justify-between mt-12">
+                        </FadeInOnScroll>
+                    </div>
+
+
+                    <div className="mx-auto flex flex-col md:flex-row items-center justify-between mt-12">
+                        <FadeInOnScroll>
                             <div className="w-full md:w-1/2 flex flex-col items-center text-center max-w-[463px]">
                                 <Image
                                     src="/Group 21 (1).svg"
@@ -87,6 +92,8 @@ const TokenizationStep: FC = () => {
                                     (Ethereum, Polygon, etc.).
                                 </p>
                             </div>
+                        </FadeInOnScroll>
+                        <FadeInOnScroll>
                             <div className="relative md:h-[700px] h-[400px] w-full">
                                 <InfinityCanvas />
                                 <Image
@@ -97,8 +104,9 @@ const TokenizationStep: FC = () => {
                                     className="drop-shadow-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
                                 />
                             </div>
-                        </div>
-                    </FadeInOnScroll>
+                        </FadeInOnScroll>
+                    </div>
+
                 </div>
             </div>
         </section>
