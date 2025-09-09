@@ -29,7 +29,7 @@ const InfinitySection: FC = () => {
       <RayBackground className="z-0" />
 
       <FadeInOnScroll>
-        <h1 className="md:text-[100px]  font-semibold text-center leading-[1.2] z-20 max-w-[972px] md:pt-[175px] mb-4 pt-30 mx-auto relative">
+        <h1 className="md:text-[100px] text-white font-semibold text-center leading-[1.2] z-20 max-w-[972px] md:pt-[175px] mb-4 pt-30 mx-auto relative">
           Tokenize Real World Assets in One Click
         </h1>
       </FadeInOnScroll>
@@ -67,7 +67,7 @@ const InfinitySection: FC = () => {
               />
             </>
           )}
-          <div className="relative w-full h-full">
+          <div className="relative w-full h-full ">
             <InfinityCanvas />
           </div>
           <Image

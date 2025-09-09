@@ -39,7 +39,7 @@ const TokenizationStep: FC = () => {
             <div className="sm:py-20 py-12 relative max-w-[1280px] mx-auto">
                 <div className="relative z-10">
                     <FadeInOnScroll>
-                        <h2 className="text-center sm:pb-0 pb-8">
+                        <h2 className="text-center sm:pb-0 pb-8 text-white">
                             Why Tokenization is the Future of
                             <br className="hidden lg:block" /> Capital Markets.
                         </h2>
