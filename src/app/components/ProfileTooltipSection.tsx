@@ -2,6 +2,7 @@
 import React, { FC, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import FadeInOnScroll from "./FadeInOnScroll";
 
 interface Profile {
   name: string;
@@ -24,9 +25,11 @@ const ProfileTooltipSection: FC = () => {
 
   return (
     <section className="justify-center flex flex-col items-center text-center sm:py-16 py-12">
-      <h2 className="text-white">We help financial Team</h2>
+      <FadeInOnScroll>
+        <h2 className="text-white">We help financial Team</h2>
+      </FadeInOnScroll>
       <div className="flex flex-col justify-center items-center sm:pt-14 pt-8 bg-black text-center">
-        <div className="flex flex-wrap px-4 md:px-auto justify-center items-center sm:pb-20 pb-8 gap-4 ms:gap-0">
+        <FadeInOnScroll className="flex flex-wrap px-4 md:px-auto justify-center items-center sm:pb-20 pb-8 gap-4 ms:gap-0">
           {profiles.map((profile, index) => (
             <motion.div
               key={index}
@@ -74,11 +77,13 @@ const ProfileTooltipSection: FC = () => {
               )}
             </motion.div>
           ))}
-        </div>
-        <button className="flex items-center text-black gap-3 px-8 py-4 bg-white rounded-full text-lg font-medium hover:bg-gray-100 transition shadow-[0px_0px_10px_rgba(255,255,255,0.55)]">
-          Join our Communities
-          <Image src="/hands.png" alt="Arrow Right" width={34} height={34} />
-        </button>
+        </FadeInOnScroll>
+        <FadeInOnScroll>
+          <button className="flex items-center text-black gap-3 px-8 py-4 bg-white rounded-full text-lg font-medium hover:bg-gray-100 transition shadow-[0px_0px_10px_rgba(255,255,255,0.55)]">
+            Join our Communities
+            <Image src="/hands.png" alt="Arrow Right" width={34} height={34} />
+          </button>
+        </FadeInOnScroll>
       </div>
     </section>
   );

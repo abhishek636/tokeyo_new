@@ -19,12 +19,9 @@ export default function Home() {
       <TokenizationSection />
       <TokenizationStep />
       <FloatingSection />
-      <FadeInOnScroll>
-        <Token />
-      </FadeInOnScroll>
-      <FadeInOnScroll>
-        <ProfileTooltipSection />
-      </FadeInOnScroll>
+      <Token />
+      <ProfileTooltipSection />
+
     </div>
   );
 }

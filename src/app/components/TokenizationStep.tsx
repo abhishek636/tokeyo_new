@@ -41,10 +41,9 @@ const TokenizationStep: FC = () => {
                             <br className="hidden lg:block" /> Capital Markets.
                         </h2>
                     </FadeInOnScroll>
-
-                    <div className="mx-auto flex flex-col md:flex-row items-center justify-between">
-                        <FadeInOnScroll>
-                            <div className="relative md:h-[700px] h-[400px] w-full">
+                    
+                        <div className="mx-auto flex flex-col md:flex-row items-center justify-between">
+                            <FadeInOnScroll className="relative md:h-[700px] h-[400px] w-full">
                                 <InfinityCanvas />
                                 <Image
                                     src="/leftphone.png"
@@ -53,10 +52,8 @@ const TokenizationStep: FC = () => {
                                     height={700}
                                     className="drop-shadow-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
                                 />
-                            </div>
-                        </FadeInOnScroll>
-                        <FadeInOnScroll>
-                            <div className="w-full md:w-1/2 flex flex-col items-center text-center max-w-[463px]">
+                            </FadeInOnScroll>
+                            <FadeInOnScroll className="w-full md:w-1/2 flex flex-col items-center text-center max-w-[463px]">
                                 <Image
                                     src="/Check.svg"
                                     alt="Check"
@@ -70,14 +67,12 @@ const TokenizationStep: FC = () => {
                                     art, securities, etc.) Our platform handles legal compliance and
                                     performs quick KYC/AML checks.
                                 </p>
-                            </div>
-                        </FadeInOnScroll>
-                    </div>
-
-
-                    <div className="mx-auto flex flex-col md:flex-row items-center justify-between mt-12">
-                        <FadeInOnScroll>
-                            <div className="w-full md:w-1/2 flex flex-col items-center text-center max-w-[463px]">
+                            </FadeInOnScroll>
+                        </div>
+                    
+                    
+                        <div className="mx-auto flex flex-col md:flex-row items-center justify-between mt-12">
+                            <FadeInOnScroll className="w-full md:w-1/2 flex flex-col items-center text-center max-w-[463px]">
                                 <Image
                                     src="/Group 21 (1).svg"
                                     alt="Check"
@@ -91,10 +86,8 @@ const TokenizationStep: FC = () => {
                                     is created using secure smart contracts on a blockchain of your choice
                                     (Ethereum, Polygon, etc.).
                                 </p>
-                            </div>
-                        </FadeInOnScroll>
-                        <FadeInOnScroll>
-                            <div className="relative md:h-[700px] h-[400px] w-full">
+                            </FadeInOnScroll>
+                            <FadeInOnScroll className="relative md:h-[700px] h-[400px] w-full">
                                 <InfinityCanvas />
                                 <Image
                                     src="/RIGHTPHONE.png"
@@ -103,10 +96,9 @@ const TokenizationStep: FC = () => {
                                     height={700}
                                     className="drop-shadow-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
                                 />
-                            </div>
-                        </FadeInOnScroll>
-                    </div>
-
+                            </FadeInOnScroll>
+                        </div>
+                    
                 </div>
             </div>
         </section>
