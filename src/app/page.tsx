@@ -16,14 +16,9 @@ export default function Home() {
       <FadeInOnScroll>
         <PartnersMarquee />
       </FadeInOnScroll>
-      <FadeInOnScroll>
-        <TokenizationSection />
-      </FadeInOnScroll>
+      <TokenizationSection />
       <TokenizationStep />
-      
-
       <FloatingSection />
-
       <FadeInOnScroll>
         <Token />
       </FadeInOnScroll>
