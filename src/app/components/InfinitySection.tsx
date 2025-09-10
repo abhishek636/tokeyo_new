@@ -3,10 +3,10 @@
 import React, { FC, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import InfinityCanvas from "./InfinityCanvas";
+// import InfinityCanvas from "./InfinityCanvas";
 import LightRayBackground from './LightRayBackground';
 // Make sure this component exists
-import RayBackground from './RayBackground';
+// import RayBackground from './RayBackground';
 import FadeInOnScroll from "./FadeInOnScroll";
 import { Canvas } from '@react-three/fiber'
 import Model from './Model';

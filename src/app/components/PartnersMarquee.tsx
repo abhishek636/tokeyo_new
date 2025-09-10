@@ -1,5 +1,5 @@
 // No "use client"
-import Image from "next/image";
+
 import PartnersMarqueeClient from "./PartnersMarqueeClient";
 const partners = [
   { id: 1, logo: "/sliderimage/microsoft.png", alt: "Partner 1 Logo" },
