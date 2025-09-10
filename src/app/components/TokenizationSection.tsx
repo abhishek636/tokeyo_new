@@ -1,7 +1,8 @@
 "use client";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-const NeonBlob = dynamic(() => import("@/app/components/NeonBlob"), { ssr: false });
+// const NeonBlob = dynamic(() => import("@/app/components/NeonBlob"), { ssr: false });
+import Orb from "./Orb";
 
 export default function TokenizationSection() {
   return (
@@ -16,7 +17,16 @@ export default function TokenizationSection() {
           className="z-10"
         /> */}
       <div className="relative w-full sm:h-[700px] h-[350px] flex items-center justify-center">
-        <NeonBlob />
+        {/* <NeonBlob /> */}
+        <div style={{ width: '100%', height: '100%' }}>
+          <Orb
+            hoverIntensity={0.5}
+            rotateOnHover={true}
+            hue={0}
+            forceHoverState={false}
+          />
+        </div>
+
 
         {/* Floating Badges */}
         <div className="absolute left-1/4 sm:left-1/3 sm:top-1/2 transform -translate-y-1/2 -translate-x-1/2 z-10">

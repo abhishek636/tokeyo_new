@@ -7,6 +7,8 @@ import LightRayBackground from "./LightRayBackground";
 import RayBackground from "./RayBackground";
 import GradientLines from "./GradientLines";
 import FadeInOnScroll from "./FadeInOnScroll";
+// import SplashCursor from './SplashCursor';
+// import Plasma from "./Plasma";
 
 // Dynamically import InfinityCanvas to disable SSR
 const InfinityCanvas = dynamic(() => import("./InfinityCanvas"), { ssr: false });
@@ -14,7 +16,18 @@ const InfinityCanvas = dynamic(() => import("./InfinityCanvas"), { ssr: false })
 const TokenizationStep: FC = () => {
     return (
         <section className="relative overflow-hidden">
+            {/* <SplashCursor /> */}
             <LightRayBackground className="-z-10" />
+            {/* <div style={{ width: '100%', height: '100%', position: 'absolute' }} className="z-10">
+                <Plasma
+                    color="#ffffffff"
+                    speed={0.6}
+                    direction="forward" 
+                    scale={1.1}
+                    opacity={0.8}
+                    mouseInteractive={true}
+                />
+            </div> */}
             <RayBackground
                 className="absolute inset-0 z-0"
                 circleCount={4}

@@ -8,6 +8,9 @@ import LightRayBackground from './LightRayBackground';
 // Make sure this component exists
 import RayBackground from './RayBackground';
 import FadeInOnScroll from "./FadeInOnScroll";
+import { Canvas } from '@react-three/fiber'
+import Model from './Model';
+import { Environment } from '@react-three/drei'
 
 const InfinitySection: FC = () => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
@@ -26,7 +29,7 @@ const InfinitySection: FC = () => {
       {/* LightRayBackground is now placed as a background with a z-index */}
       <LightRayBackground className="z-10 w-full" />
       {/* RayBackground is another background layer that should be behind the rays */}
-      <RayBackground className="z-0" />
+      {/* <RayBackground className="z-20" /> */}
 
       <FadeInOnScroll>
         <h1 className="md:text-[100px] text-white font-semibold text-center leading-[1.2] z-20 max-w-[972px] md:pt-[175px] mb-4 pt-30 mx-auto relative">
@@ -67,9 +70,14 @@ const InfinitySection: FC = () => {
               />
             </>
           )}
-          <div className="relative w-full h-full ">
+          <Canvas style={{ background: '#000000' }}>
+            <Model />
+            <directionalLight intensity={2} position={[0, 2, 3]} />
+            <Environment preset="city" />
+          </Canvas>
+          {/* <div className="relative w-full h-full ">
             <InfinityCanvas />
-          </div>
+          </div> */}
           <Image
             src="/phone-mockup.png"
             alt="App Preview"
