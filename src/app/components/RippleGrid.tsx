@@ -1,3 +1,5 @@
+'use client';
+
 import { useRef, useEffect } from 'react';
 import { Renderer, Program, Triangle, Mesh } from 'ogl';
 
@@ -39,10 +41,10 @@ const RippleGrid: React.FC<Props> = ({
   const mousePositionRef = useRef({ x: 0.5, y: 0.5 });
   const targetMouseRef = useRef({ x: 0.5, y: 0.5 });
   const mouseInfluenceRef = useRef(0);
-  const uniformsRef = useRef<Uniforms | null>(null); // ✅ fixed type
+  const uniformsRef = useRef<Uniforms | null>(null);
 
   useEffect(() => {
-    const container = containerRef.current; // ✅ fix cleanup ref issue
+    const container = containerRef.current;
     if (!container) return;
 
     const hexToRgb = (hex: string): [number, number, number] => {
@@ -72,8 +74,8 @@ void main() {
 }`;
 
     const frag = `precision highp float;
-    // ... shader code unchanged ...
-    gl_FragColor = vec4(color * t * finalFade * opacity, alpha);
+// ... shader code unchanged ...
+gl_FragColor = vec4(color * t * finalFade * opacity, alpha);
 }`;
 
     const uniforms: Uniforms = {
@@ -140,9 +142,9 @@ void main() {
       mousePositionRef.current.x += (targetMouseRef.current.x - mousePositionRef.current.x) * lerpFactor;
       mousePositionRef.current.y += (targetMouseRef.current.y - mousePositionRef.current.y) * lerpFactor;
 
-      const currentInfluence = uniforms.mouseInfluence.value as number;
-      const targetInfluence = mouseInfluenceRef.current;
-      uniforms.mouseInfluence.value += (targetInfluence - currentInfluence) * 0.05;
+      // ✅ cast to number before arithmetic
+      uniforms.mouseInfluence.value = (uniforms.mouseInfluence.value as number) + 
+        (mouseInfluenceRef.current - (uniforms.mouseInfluence.value as number)) * 0.05;
 
       uniforms.mousePosition.value = [mousePositionRef.current.x, mousePositionRef.current.y];
 
@@ -175,7 +177,7 @@ void main() {
     gridRotation,
     mouseInteraction,
     mouseInteractionRadius,
-  ]); // ✅ added missing deps
+  ]);
 
   useEffect(() => {
     if (!uniformsRef.current) return;
