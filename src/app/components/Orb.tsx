@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+// @ts-expect-error – ogl has no official types
 import { Renderer, Program, Mesh, Triangle, Vec3 } from 'ogl';
 
 import './Orb.css';
@@ -138,16 +139,14 @@ export default function Orb({
       float v1 = light2(1.5, 5.0, d);
       v1 *= light1(1.0, 50.0, d0);
       
-      // build color
       vec3 col = mix(color1, color2, cl);
       col = mix(color3, col, v0);
       col = (col + v1);
       col = clamp(col, 0.0, 1.0);
 
-      // Solid center, fade only at edges
       float alpha = 1.0;
       if (len > 1.0) {
-        alpha = 0.0; // fully transparent outside orb
+        alpha = 0.0;
       } else {
         alpha = smoothstep(1.0, innerRadius, len);
       }
@@ -213,7 +212,11 @@ export default function Orb({
       renderer.setSize(width * dpr, height * dpr);
       gl.canvas.style.width = width + 'px';
       gl.canvas.style.height = height + 'px';
-      program.uniforms.iResolution.value.set(gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height);
+      program.uniforms.iResolution.value.set(
+        gl.canvas.width,
+        gl.canvas.height,
+        gl.canvas.width / gl.canvas.height
+      );
     }
     window.addEventListener('resize', resize);
     resize();

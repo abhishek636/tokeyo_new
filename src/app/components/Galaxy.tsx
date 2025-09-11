@@ -231,24 +231,9 @@ export default function Galaxy({
       gl.clearColor(0, 0, 0, 1);
     }
 
-    let program: Program;
-
-    function resize() {
-      const scale = 1;
-      renderer.setSize(ctn.offsetWidth * scale, ctn.offsetHeight * scale);
-      if (program) {
-        program.uniforms.uResolution.value = new Color(
-          gl.canvas.width,
-          gl.canvas.height,
-          gl.canvas.width / gl.canvas.height
-        );
-      }
-    }
-    window.addEventListener('resize', resize, false);
-    resize();
-
     const geometry = new Triangle(gl);
-    program = new Program(gl, {
+
+    const program = new Program(gl, {
       vertex: vertexShader,
       fragment: fragmentShader,
       uniforms: {
@@ -277,8 +262,22 @@ export default function Galaxy({
       }
     });
 
+    function resize() {
+      const scale = 1;
+      renderer.setSize(ctn.offsetWidth * scale, ctn.offsetHeight * scale);
+      if (program) {
+        program.uniforms.uResolution.value = new Color(
+          gl.canvas.width,
+          gl.canvas.height,
+          gl.canvas.width / gl.canvas.height
+        );
+      }
+    }
+    window.addEventListener('resize', resize, false);
+    resize();
+
     const mesh = new Mesh(gl, { geometry, program });
-    let animateId: number;
+    let animateId: number | null = null;
 
     function update(t: number) {
       animateId = requestAnimationFrame(update);
@@ -293,9 +292,9 @@ export default function Galaxy({
 
       smoothMouseActive.current += (targetMouseActive.current - smoothMouseActive.current) * lerpFactor;
 
-      program.uniforms.uMouse.value[0] = smoothMousePos.current.x;
-      program.uniforms.uMouse.value[1] = smoothMousePos.current.y;
-      program.uniforms.uMouseActiveFactor.value = smoothMouseActive.current;
+      (program.uniforms.uMouse.value as Float32Array)[0] = smoothMousePos.current.x;
+      (program.uniforms.uMouse.value as Float32Array)[1] = smoothMousePos.current.y;
+      (program.uniforms.uMouseActiveFactor as { value: number }).value = smoothMouseActive.current;
 
       renderer.render({ scene: mesh });
     }
@@ -320,13 +319,15 @@ export default function Galaxy({
     }
 
     return () => {
-      cancelAnimationFrame(animateId);
+      if (animateId !== null) cancelAnimationFrame(animateId);
       window.removeEventListener('resize', resize);
       if (mouseInteraction) {
         ctn.removeEventListener('mousemove', handleMouseMove);
         ctn.removeEventListener('mouseleave', handleMouseLeave);
       }
-      ctn.removeChild(gl.canvas);
+      try {
+        ctn.removeChild(gl.canvas);
+      } catch {}
       gl.getExtension('WEBGL_lose_context')?.loseContext();
     };
   }, [
