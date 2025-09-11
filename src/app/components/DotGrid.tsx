@@ -5,9 +5,10 @@ import { InertiaPlugin } from 'gsap/InertiaPlugin';
 
 gsap.registerPlugin(InertiaPlugin);
 
-const throttle = (func: (...args: any[]) => void, limit: number) => {
+// Fixed: Added proper typing for the throttle function
+const throttle = <T extends unknown[]>(func: (...args: T) => void, limit: number) => {
   let lastCall = 0;
-  return function (this: any, ...args: any[]) {
+  return function (this: unknown, ...args: T) {
     const now = performance.now();
     if (now - lastCall >= limit) {
       lastCall = now;
@@ -182,7 +183,7 @@ const DotGrid: React.FC<DotGridProps> = ({
       ro = new ResizeObserver(buildGrid);
       wrapperRef.current && ro.observe(wrapperRef.current);
     } else {
-      (window as Window).addEventListener('resize', buildGrid);
+      window.addEventListener('resize', buildGrid);
     }
     return () => {
       if (ro) ro.disconnect();
@@ -213,7 +214,10 @@ const DotGrid: React.FC<DotGridProps> = ({
       pr.vy = vy;
       pr.speed = speed;
 
-      const rect = canvasRef.current!.getBoundingClientRect();
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      
+      const rect = canvas.getBoundingClientRect();
       pr.x = e.clientX - rect.left;
       pr.y = e.clientY - rect.top;
 
@@ -241,7 +245,10 @@ const DotGrid: React.FC<DotGridProps> = ({
     };
 
     const onClick = (e: MouseEvent) => {
-      const rect = canvasRef.current!.getBoundingClientRect();
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      
+      const rect = canvas.getBoundingClientRect();
       const cx = e.clientX - rect.left;
       const cy = e.clientY - rect.top;
       for (const dot of dotsRef.current) {
@@ -268,7 +275,8 @@ const DotGrid: React.FC<DotGridProps> = ({
       }
     };
 
-    const throttledMove = throttle(onMove, 50);
+    // Fixed: Added proper typing for the throttled function
+    const throttledMove = throttle<[MouseEvent]>(onMove, 50);
     window.addEventListener('mousemove', throttledMove, { passive: true });
     window.addEventListener('click', onClick);
 
@@ -278,6 +286,7 @@ const DotGrid: React.FC<DotGridProps> = ({
     };
   }, [maxSpeed, speedTrigger, proximity, resistance, returnDuration, shockRadius, shockStrength]);
 
+  // Fixed: Removed the unused expression by adding a return statement
   return (
     <section className={`flex items-center justify-center h-full w-full relative ${className}`} style={style}>
       <div ref={wrapperRef} className="w-full h-full relative">

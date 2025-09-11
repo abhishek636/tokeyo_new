@@ -7,20 +7,20 @@ import PartnersMarquee from "./PartnersMarquee"; // server component
 export default function MaskedSection() {
   const container = useRef<HTMLDivElement | null>(null);
   const stickyMask = useRef<HTMLDivElement | null>(null);
+  const easedScrollProgressRef = useRef(0); // Fixed: Moved variable to useRef
 
   const initialMaskSize = 0.8;
   const targetMaskSize = 30;
   const easing = 0.15;
-  let easedScrollProgress = 0;
 
   const getScrollProgress = useCallback(() => {
     if (!container.current || !stickyMask.current) return 0;
     const scrollProgress =
       stickyMask.current.offsetTop /
       (container.current.getBoundingClientRect().height - window.innerHeight);
-    const delta = scrollProgress - easedScrollProgress;
-    easedScrollProgress += delta * easing;
-    return easedScrollProgress;
+    const delta = scrollProgress - easedScrollProgressRef.current;
+    easedScrollProgressRef.current += delta * easing;
+    return easedScrollProgressRef.current;
   }, [easing]);
 
   const animate = useCallback(() => {
