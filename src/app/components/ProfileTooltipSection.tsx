@@ -3,6 +3,7 @@ import React, { FC, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import FadeInOnScroll from "./FadeInOnScroll";
+// import RippleGrid from "./RippleGrid";
 
 interface Profile {
   name: string;
@@ -24,12 +25,24 @@ const ProfileTooltipSection: FC = () => {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <section className="justify-center flex flex-col items-center text-center sm:py-16 py-12">
+    <section className="justify-center flex flex-col items-center text-center sm:py-16 py-12 relative bg-[url('/bg-bottom.png')] bg-cover bg-center">
+      {/* <div style={{ position: 'absolute', height: '100%', overflow: 'hidden' }} className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <RippleGrid
+          enableRainbow={false}
+          gridColor="#4d87ddff"
+          rippleIntensity={0.05}
+          gridSize={10}
+          gridThickness={15}
+          mouseInteraction={true}
+          mouseInteractionRadius={1.2}
+          opacity={0.8}
+        />
+      </div> */}
       <FadeInOnScroll>
-        <h2 className="text-white">We help financial Team</h2>
+        <h2 className="text-white z-20 relative">We help financial Team</h2>
       </FadeInOnScroll>
-      <div className="flex flex-col justify-center items-center sm:pt-14 pt-8 bg-black text-center">
-        <FadeInOnScroll className="flex flex-wrap px-4 md:px-auto justify-center items-center sm:pb-20 pb-8 gap-4 ms:gap-0">
+      <div className="flex flex-col justify-center items-center sm:pt-14 pt-8 text-center">
+        <FadeInOnScroll className="flex flex-wrap px-4 md:px-auto justify-center items-center sm:pb-20 pb-8 gap-4 ms:gap-0 z-20">
           {profiles.map((profile, index) => (
             <motion.div
               key={index}
@@ -79,7 +92,7 @@ const ProfileTooltipSection: FC = () => {
           ))}
         </FadeInOnScroll>
         <FadeInOnScroll>
-          <button className="flex items-center text-black gap-3 px-8 py-4 bg-white rounded-full text-lg font-medium hover:bg-gray-100 transition shadow-[0px_0px_10px_rgba(255,255,255,0.55)]">
+          <button className="flex items-center text-black gap-3 px-8 py-4 bg-white z-20 relative rounded-full text-lg font-medium hover:bg-gray-100 transition shadow-[0px_0px_10px_rgba(255,255,255,0.55)]">
             Join our Communities
             <Image src="/hands.png" alt="Arrow Right" width={34} height={34} />
           </button>

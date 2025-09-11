@@ -1,8 +1,9 @@
 "use client";
-import dynamic from "next/dynamic";
+import FloatingBox from "./FloatingBox";
 import Image from "next/image";
 // const NeonBlob = dynamic(() => import("@/app/components/NeonBlob"), { ssr: false });
 import Orb from "./Orb";
+import Galaxy from "./Galaxy";
 
 export default function TokenizationSection() {
   return (
@@ -16,6 +17,17 @@ export default function TokenizationSection() {
           height={700}
           className="z-10"
         /> */}
+
+      <div style={{ width: '100%', height: '100%', position: 'absolute' }}>
+        <Galaxy
+          mouseRepulsion={true}
+          mouseInteraction={true}
+          density={1}
+          glowIntensity={0.2}
+          saturation={0.8}
+          hueShift={240}
+        />
+      </div>
       <div className="relative w-full sm:h-[700px] h-[350px] flex items-center justify-center">
         {/* <NeonBlob /> */}
         <div style={{ width: '100%', height: '100%' }}>
@@ -29,7 +41,7 @@ export default function TokenizationSection() {
 
 
         {/* Floating Badges */}
-        <div className="absolute left-1/4 sm:left-1/3 sm:top-1/2 transform -translate-y-1/2 -translate-x-1/2 z-10">
+        <FloatingBox className="absolute left-1/4 sm:left-1/3 sm:top-1/2 transform -translate-y-1/2 -translate-x-1/2 z-10">
           <Image
             src="/eth.png"
             alt="Ethereum"
@@ -37,9 +49,9 @@ export default function TokenizationSection() {
             height={91}
             className="w-16 h-16 md:w-[91px] md:h-[91px]"
           />
-        </div>
+        </FloatingBox>
 
-        <div className="absolute sm:right-1/3 sm:top-1/2 right-1/4 transform -translate-y-1/2 translate-x-1/2">
+        <FloatingBox className="absolute sm:right-1/3 sm:top-1/2 right-1/4 transform -translate-y-1/2 translate-x-1/2">
           <Image
             src="/btc.png"
             alt="Ethereum"
@@ -47,15 +59,15 @@ export default function TokenizationSection() {
             height={91}
             className="w-16 h-16 md:w-[91px] md:h-[91px]"
           />
-        </div>
+        </FloatingBox>
 
-        <div className="absolute right-1/4 left-0 top-2/3 transform -translate-y-1/2 translate-x-1/2 z-10">
+        <FloatingBox className="absolute right-1/4 left-0 top-2/3 transform -translate-y-1/2 translate-x-1/2 z-10">
           <div className=" bg-white/10 backdrop-blur-xs w-fit sm:px-8 px-4 py-2 sm:py-4.5 rounded-full sm:text-xl shadow-md">
             24/7 Global Liquidity
           </div>
-        </div>
+        </FloatingBox>
 
-        <div className="absolute bottom-0 left-1/4 transform translate-y-1/2">
+        <FloatingBox className="absolute bottom-0 left-1/4 transform translate-y-1/2">
           <Image
             src="/sol1.png"
             alt="Ethereum"
@@ -63,7 +75,7 @@ export default function TokenizationSection() {
             height={91}
             className="w-16 h-16 md:w-[91px] md:h-[91px]"
           />
-        </div>
+        </FloatingBox>
 
         {/* <div className="absolute bottom-1/24 right-0 z-10">
           <div className=" bg-white/10 backdrop-blur-xs w-fit px-8 py-4.5 rounded-full text-xl shadow-md">
@@ -71,7 +83,7 @@ export default function TokenizationSection() {
           </div>
         </div> */}
 
-        <div className="absolute bottom-1/24 right-1/5 z-10">
+        <FloatingBox className="absolute bottom-1/24 right-1/5 z-10">
           {/* Outer gradient border */}
           <div className="relative px-[1px] py-[1px] rounded-full bg-gradient-to-r from-white/15 to-white/5">
             {/* Inner content → change bg color here */}
@@ -79,9 +91,9 @@ export default function TokenizationSection() {
               Institutional-Grade Compliance
             </div>
           </div>
-        </div>
+        </FloatingBox>
 
-        <div className="absolute sm:bottom-1/10 sm:left-1/4 left-1/8 z-10">
+        <FloatingBox className="absolute sm:bottom-1/10 sm:left-1/4 left-1/8 z-10">
           {/* Outer gradient border */}
           <div className="relative px-[1px] py-[1px] rounded-full bg-gradient-to-r from-white/15 to-white/5">
             {/* Inner content → change bg color here */}
@@ -89,7 +101,7 @@ export default function TokenizationSection() {
               Fractional Ownership
             </div>
           </div>
-        </div>
+        </FloatingBox>
 
         {/* <div className="absolute bottom-1/10 left-0 z-10">
           <div className=" bg-white/10 backdrop-blur-xs w-fit px-8 py-4.5 rounded-full text-xl shadow-md">

@@ -2,6 +2,8 @@
 import React, { FC } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import DotGrid from "./DotGrid";
+import FloatingBox from "./FloatingBox";
 
 const features = [
   {
@@ -31,38 +33,53 @@ const features = [
 
 const Token: FC = () => {
   return (
-    <section className="sm:py-16 py-12 md:px-auto px-4 ">
-      <motion.h2
-        className="title text-white text-center sm:mb-14 mb-8"
-        initial={{ opacity: 0, y: -30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
-        What is Tokenization?
-      </motion.h2>
+    <section className="relative overflow-hidden">
+      <div style={{ width: '100%', height: '100%', position: 'absolute' }} className="z-1">
+        <DotGrid
+          dotSize={2}
+          gap={15}
+          baseColor="#5227FF"
+          activeColor="#5227FF"
+          proximity={120}
+          shockRadius={250}
+          shockStrength={5}
+          resistance={750}
+          returnDuration={1.5}
+        />
+      </div>
+      <div className="sm:py-16 py-12 md:px-auto px-4 ">
+        <motion.h2
+          className="title text-white text-center sm:mb-14 mb-8 z-20 relative"
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          What is Tokenization?
+        </motion.h2>
 
-      <div className="grid md:grid-cols-2 grid-rows-2 gap-4 max-w-[1096px] mx-auto ">
-        {features.map((feature, i) => (
-          <motion.div
-            key={i}
-            className="card-wrapper "
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: i * 0.2 }}
-            viewport={{ once: true }}
-          >
-            <div className="card h-full rounded-2xl">
-              <div className="card-inner flex flex-col justify-flex-start items-center p-4.5  max-w-[350px] mx-auto">
-                <h3 className="text-white text-center card-title typing">{feature.title}</h3>
-                <p className="card-desc text-center">{feature.description}</p>
-                <div className="icon-wrap">
-                  <Image src={feature.image} alt={feature.title} className="icon" width={220} height={200} />
+        <div className="grid md:grid-cols-2 grid-rows-2 gap-4 max-w-[1096px] mx-auto ">
+          {features.map((feature, i) => (
+            <motion.div
+              key={i}
+              className="card-wrapper z-10"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: i * 0.2 }}
+              viewport={{ once: true }}
+            >
+              <div className="card h-full rounded-2xl">
+                <div className="card-inner flex flex-col justify-flex-start items-center p-4.5  max-w-[350px] mx-auto">
+                  <h3 className="text-white text-center card-title typing">{feature.title}</h3>
+                  <p className="card-desc text-center">{feature.description}</p>
+                  <FloatingBox className="icon-wrap my-6">
+                    <Image src={feature.image} alt={feature.title} className="icon" width={220} height={200} />
+                  </FloatingBox>
                 </div>
               </div>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))}
+        </div>
       </div>
 
       <style jsx>{`

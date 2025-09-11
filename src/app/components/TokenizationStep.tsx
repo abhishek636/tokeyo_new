@@ -3,10 +3,11 @@
 import React, { FC } from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import LightRayBackground from "./LightRayBackground";
+// import LightRayBackground from "./LightRayBackground";
 import RayBackground from "./RayBackground";
 import GradientLines from "./GradientLines";
 import FadeInOnScroll from "./FadeInOnScroll";
+import DotGrid from "./DotGrid";
 // import SplashCursor from './SplashCursor';
 // import Plasma from "./Plasma";
 
@@ -16,8 +17,22 @@ const InfinityCanvas = dynamic(() => import("./InfinityCanvas"), { ssr: false })
 const TokenizationStep: FC = () => {
     return (
         <section className="relative overflow-hidden">
+            <div style={{ width: '100%', height: '100%', position: 'absolute' }} className="z-1">
+                <DotGrid
+                    dotSize={2}
+                    gap={15}
+                    baseColor="#5227FF"
+                    activeColor="#5227FF"
+                    proximity={120}
+                    shockRadius={250}
+                    shockStrength={5}
+                    resistance={750}
+                    returnDuration={1.5}
+                />
+            </div>
+
             {/* <SplashCursor /> */}
-            <LightRayBackground className="-z-10" />
+            {/* <LightRayBackground className="-z-10" /> */}
             {/* <div style={{ width: '100%', height: '100%', position: 'absolute' }} className="z-10">
                 <Plasma
                     color="#ffffffff"
