@@ -5,16 +5,16 @@ import { InertiaPlugin } from 'gsap/InertiaPlugin';
 
 gsap.registerPlugin(InertiaPlugin);
 
-const throttle = (func: (...args: any[]) => void, limit: number) => {
+function throttle<T extends (...args: unknown[]) => void>(func: T, limit: number) {
   let lastCall = 0;
-  return function (this: any, ...args: any[]) {
+  return function (this: unknown, ...args: Parameters<T>) {
     const now = performance.now();
     if (now - lastCall >= limit) {
       lastCall = now;
       func.apply(this, args);
     }
   };
-};
+}
 
 interface Dot {
   cx: number;
@@ -46,7 +46,7 @@ function hexToRgb(hex: string) {
   return {
     r: parseInt(m[1], 16),
     g: parseInt(m[2], 16),
-    b: parseInt(m[3], 16),
+    b: parseInt(m[3], 16)
   };
 }
 
@@ -63,7 +63,7 @@ const DotGrid: React.FC<DotGridProps> = ({
   resistance = 750,
   returnDuration = 1.5,
   className = '',
-  style,
+  style
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -76,7 +76,7 @@ const DotGrid: React.FC<DotGridProps> = ({
     speed: 0,
     lastTime: 0,
     lastX: 0,
-    lastY: 0,
+    lastY: 0
   });
 
   const baseRgb = useMemo(() => hexToRgb(baseColor), [baseColor]);
@@ -84,7 +84,6 @@ const DotGrid: React.FC<DotGridProps> = ({
 
   const circlePath = useMemo(() => {
     if (typeof window === 'undefined' || !window.Path2D) return null;
-
     const p = new Path2D();
     p.arc(0, 0, dotSize / 2, 0, Math.PI * 2);
     return p;
@@ -172,7 +171,9 @@ const DotGrid: React.FC<DotGridProps> = ({
     };
 
     draw();
-    return () => cancelAnimationFrame(rafId);
+    return () => {
+      cancelAnimationFrame(rafId);
+    };
   }, [proximity, baseColor, activeRgb, baseRgb, circlePath]);
 
   useEffect(() => {
@@ -182,7 +183,7 @@ const DotGrid: React.FC<DotGridProps> = ({
       ro = new ResizeObserver(buildGrid);
       wrapperRef.current && ro.observe(wrapperRef.current);
     } else {
-      (window as Window).addEventListener('resize', buildGrid);
+      window.addEventListener('resize', buildGrid);
     }
     return () => {
       if (ro) ro.disconnect();
@@ -225,16 +226,16 @@ const DotGrid: React.FC<DotGridProps> = ({
           const pushX = dot.cx - pr.x + vx * 0.005;
           const pushY = dot.cy - pr.y + vy * 0.005;
           gsap.to(dot, {
-            ...( { inertia: { xOffset: pushX, yOffset: pushY, resistance } } as any ),
+            inertia: { xOffset: pushX, yOffset: pushY, resistance },
             onComplete: () => {
               gsap.to(dot, {
                 xOffset: 0,
                 yOffset: 0,
                 duration: returnDuration,
-                ease: 'elastic.out(1,0.75)',
+                ease: 'elastic.out(1,0.75)'
               });
               dot._inertiaApplied = false;
-            },
+            }
           });
         }
       }
@@ -253,16 +254,16 @@ const DotGrid: React.FC<DotGridProps> = ({
           const pushX = (dot.cx - cx) * shockStrength * falloff;
           const pushY = (dot.cy - cy) * shockStrength * falloff;
           gsap.to(dot, {
-            ...( { inertia: { xOffset: pushX, yOffset: pushY, resistance } } as any ),
+            inertia: { xOffset: pushX, yOffset: pushY, resistance },
             onComplete: () => {
               gsap.to(dot, {
                 xOffset: 0,
                 yOffset: 0,
                 duration: returnDuration,
-                ease: 'elastic.out(1,0.75)',
+                ease: 'elastic.out(1,0.75)'
               });
               dot._inertiaApplied = false;
-            },
+            }
           });
         }
       }
@@ -279,15 +280,9 @@ const DotGrid: React.FC<DotGridProps> = ({
   }, [maxSpeed, speedTrigger, proximity, resistance, returnDuration, shockRadius, shockStrength]);
 
   return (
-    <section
-      className={` flex items-center justify-center h-full w-full relative ${className}`}
-      style={style}
-    >
+    <section className={`flex items-center justify-center h-full w-full relative ${className}`} style={style}>
       <div ref={wrapperRef} className="w-full h-full relative">
-        <canvas
-          ref={canvasRef}
-          className="absolute inset-0 w-full h-full pointer-events-none"
-        />
+        <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />
       </div>
     </section>
   );
