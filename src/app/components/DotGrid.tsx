@@ -5,7 +5,6 @@ import { InertiaPlugin } from 'gsap/InertiaPlugin';
 
 gsap.registerPlugin(InertiaPlugin);
 
-// Fixed: Added proper typing for the throttle function
 const throttle = <T extends unknown[]>(func: (...args: T) => void, limit: number) => {
   let lastCall = 0;
   return function (this: unknown, ...args: T) {
@@ -179,15 +178,24 @@ const DotGrid: React.FC<DotGridProps> = ({
   useEffect(() => {
     buildGrid();
     let ro: ResizeObserver | null = null;
-    if ('ResizeObserver' in window) {
+    
+    // Fixed: Use a type-safe approach to check for ResizeObserver
+    const hasResizeObserver = typeof window !== 'undefined' && 'ResizeObserver' in window;
+    
+    if (hasResizeObserver) {
       ro = new ResizeObserver(buildGrid);
       wrapperRef.current && ro.observe(wrapperRef.current);
     } else {
+      // This is now safe because we've confirmed window exists
       window.addEventListener('resize', buildGrid);
     }
+    
     return () => {
-      if (ro) ro.disconnect();
-      else window.removeEventListener('resize', buildGrid);
+      if (ro) {
+        ro.disconnect();
+      } else if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', buildGrid);
+      }
     };
   }, [buildGrid]);
 
@@ -275,7 +283,6 @@ const DotGrid: React.FC<DotGridProps> = ({
       }
     };
 
-    // Fixed: Added proper typing for the throttled function
     const throttledMove = throttle<[MouseEvent]>(onMove, 50);
     window.addEventListener('mousemove', throttledMove, { passive: true });
     window.addEventListener('click', onClick);
@@ -286,7 +293,6 @@ const DotGrid: React.FC<DotGridProps> = ({
     };
   }, [maxSpeed, speedTrigger, proximity, resistance, returnDuration, shockRadius, shockStrength]);
 
-  // Fixed: Removed the unused expression by adding a return statement
   return (
     <section className={`flex items-center justify-center h-full w-full relative ${className}`} style={style}>
       <div ref={wrapperRef} className="w-full h-full relative">

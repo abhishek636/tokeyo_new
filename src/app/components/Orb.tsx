@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-// @ts-expect-error – ogl has no official types
 import { Renderer, Program, Mesh, Triangle, Vec3 } from 'ogl';
 
 import './Orb.css';
