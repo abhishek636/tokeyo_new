@@ -13,9 +13,15 @@ export default function MaskedSection() {
   const easing = 0.15;
   let easedScrollProgress = 0;
 
-  useEffect(() => {
-    requestAnimationFrame(animate);
-  }, []);
+  const getScrollProgress = () => {
+    if (!container.current || !stickyMask.current) return 0;
+    const scrollProgress =
+      stickyMask.current.offsetTop /
+      (container.current.getBoundingClientRect().height - window.innerHeight);
+    const delta = scrollProgress - easedScrollProgress;
+    easedScrollProgress += delta * easing;
+    return easedScrollProgress;
+  };
 
   const animate = () => {
     const maskSizeProgress = targetMaskSize * getScrollProgress();
@@ -26,15 +32,9 @@ export default function MaskedSection() {
     requestAnimationFrame(animate);
   };
 
-  const getScrollProgress = () => {
-    if (!container.current || !stickyMask.current) return 0;
-    const scrollProgress =
-      stickyMask.current.offsetTop /
-      (container.current.getBoundingClientRect().height - window.innerHeight);
-    const delta = scrollProgress - easedScrollProgress;
-    easedScrollProgress += delta * easing;
-    return easedScrollProgress;
-  };
+  useEffect(() => {
+    requestAnimationFrame(animate);
+  }, []);
 
   return (
     <main className={styles.mainmask}>
